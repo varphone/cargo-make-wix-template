@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include Variables.wxi?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <StandardDirectory Id="ProgramFiles6432Folder">
+            <Directory Id="InstallFolder"
+                Name="$(var.PkgVendorDir)\$(var.PkgInstallDir)" />
+        </StandardDirectory>
+        <StandardDirectory Id="ProgramMenuFolder">
+            <!-- The vendor directory is the root of the program menu -->
+            <Directory Id="MenuShortcutsFolder" Name="$(var.PkgVendorDir)" />
+        </StandardDirectory>
+    </Fragment>
+</Wix>

@@ -1,0 +1,55 @@
+[env]
+PKG_NAME = "${CARGO_MAKE_CRATE_NAME}"
+PKG_VERSION = "${CARGO_MAKE_CRATE_VERSION}"
+PKG_ASSETS_DIR = "assets"
+PKG_PROG_NAME = "${CARGO_MAKE_CRATE_NAME}.exe"
+PKG_VENDOR_DIR = "WixTutorial"
+PKG_INSTALL_DIR = "Package"
+
+[tasks.wix]
+dependencies = ["win32", "win64"]
+
+[tasks.win32]
+dependencies = ["cargo-build-win32", "win32-en-US", "win32-zh-CN"]
+
+[tasks.win64]
+dependencies = ["cargo-build-win64", "win64-en-US", "win64-zh-CN"]
+
+[tasks.win32-en-US]
+env = { "ARCH" = "x86", "LOCALE" = "en-US", "TARGET_TRIPLE" = "i686-pc-windows-msvc" }
+run_task = "wix-build"
+
+[tasks.win32-zh-CN]
+env = { "ARCH" = "x86", "LOCALE" = "zh-CN", "TARGET_TRIPLE" = "i686-pc-windows-msvc" }
+run_task = "wix-build"
+
+[tasks.win64-en-US]
+env = { "ARCH" = "x64", "LOCALE" = "en-US", "TARGET_TRIPLE" = "x86_64-pc-windows-msvc" }
+run_task = "wix-build"
+
+[tasks.win64-zh-CN]
+env = { "ARCH" = "x64", "LOCALE" = "zh-CN", "TARGET_TRIPLE" = "x86_64-pc-windows-msvc" }
+run_task = "wix-build"
+
+[tasks.cargo-build-win32]
+command = "cargo"
+args = ["build", "--release", "--target=i686-pc-windows-msvc"]
+
+[tasks.cargo-build-win64]
+command = "cargo"
+args = ["build", "--release", "--target=x86_64-pc-windows-msvc"]
+
+[tasks.wix-build]
+env = { PKG_PROG_FILE = "target\\${TARGET_TRIPLE}\\release\\${PKG_PROG_NAME}", WIX_OUTPUT = "target\\wix\\${PKG_NAME}-${PKG_VERSION}-${ARCH}-${LOCALE}.msi" }
+command = "wix"
+args = [
+    "build",
+    ".\\wix\\Package.wxs",
+    ".\\wix\\Folders.wxs",
+    ".\\wix\\Components.wxs",
+    ".\\wix\\Package.${LOCALE}.wxl",
+    "-arch",
+    "${ARCH}",
+    "-o",
+    "${WIX_OUTPUT}",
+]

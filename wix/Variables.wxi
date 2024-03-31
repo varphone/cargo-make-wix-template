@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+    <?define PkgName = "$(env.PKG_NAME)"?>
+    <?define PkgVersion = "$(env.PKG_VERSION)"?>
+    <?define PkgProgName = "$(env.PKG_PROG_NAME)"?>
+    <?define PkgProgFile = "$(env.PKG_PROG_FILE)"?>
+    <?define PkgAssetsDir = "$(env.PKG_ASSETS_DIR)"?>
+    <?define PkgInstallDir = "$(env.PKG_INSTALL_DIR)"?>
+    <?define PkgVendorDir = "$(env.PKG_VENDOR_DIR)"?>
+    <?define UpgradeCode = "64deef2a-cf99-4a0c-be41-5faa802a9502"?>
+</Include>

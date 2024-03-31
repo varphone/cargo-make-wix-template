@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WixLocalization xmlns="http://wixtoolset.org/schemas/v4/wxl" Culture="zh-CN">
+    <String Id="Manufacturer" Value="Varphone Wong" />
+    <String Id="PackageName" Value="Wix 教程包" />
+    <String Id="DowngradeError"
+        Value="[ProductName] 的更新版本已经安装。安装程序现在将退出。" />
+</WixLocalization>

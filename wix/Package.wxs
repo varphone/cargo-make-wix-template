@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include Variables.wxi?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Package
+        Name="!(loc.PackageName)"
+        Manufacturer="!(loc.Manufacturer)"
+        Version="$(var.PkgVersion)"
+        Scope="perMachine"
+        UpgradeCode="$(var.UpgradeCode)">
+
+        <!-- The root directory of the installation -->
+        <Property Id="ManufacturerFolderName" Value="$(var.PkgVendorDir)" />
+
+        <!-- The subdirectory of the installation -->
+        <Property Id="PackageFolderName" Value="$(var.PkgInstallDir)" />
+
+        <MediaTemplate EmbedCab="yes" />
+        <MajorUpgrade
+            DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+        <Icon Id="app.icon" SourceFile="$(var.PkgAssetsDir)\app.ico" />
+        <Property Id="ARPPRODUCTICON" Value="app.icon" />
+
+        <Feature Id="Main">
+            <ComponentGroupRef Id="ApplicationComponents" />
+            <ComponentGroupRef Id="ShortcutComponents" />
+        </Feature>
+    </Package>
+</Wix>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include Variables.wxi?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <ComponentGroup Id="ApplicationComponents" Directory="InstallFolder">
+            <Component Directory="InstallFolder">
+                <File Id="ApplicationFile"
+                    Source="$(var.PkgProgFile)">
+                </File>
+            </Component>
+        </ComponentGroup>
+
+        <ComponentGroup Id="ShortcutComponents">
+            <!-- Add shortcuts to the desktop -->
+            <Component Id="DesktopShortcuts"
+                Directory="DesktopFolder"
+                Guid="7209F856-05B1-4241-9C6E-68648B339015">
+                <Shortcut Id="DesktopShortcut"
+                    Icon="app.icon"
+                    Name="!(bind.Property.ProductName)"
+                    Target="[InstallFolder]$(var.PkgProgName)"
+                />
+            </Component>
+
+            <!-- Add shortcuts to the program menu -->
+            <Component Id="ProgramMenuShortcuts"
+                Directory="MenuShortcutsFolder"
+                Guid="9E92A202-1DB0-497D-AE14-65008115AF67">
+                <Shortcut Id="ProgramMenuShortcut"
+                    Icon="app.icon"
+                    Name="!(bind.Property.ProductName)"
+                    Target="[InstallFolder]$(var.PkgProgName)">
+                </Shortcut>
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
